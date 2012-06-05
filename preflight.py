@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+"""A framework for creating simple 'preflight checklists' for robots running ROS.
+
+Randolph Voorhies (voorhies@usc.edu), 2012
+"""
 import subprocess
 import sys
 import threading
@@ -25,7 +29,7 @@ def getValue(topic):
   This is useful for checking things like battery levels, status messages, etc.
 
   Example:
-    preflight.check('Battery Level', lambda: preflight.getValue("/robot/battery_voltage"), lambda x: float(x) > 11.0)
+    preflight.check('Battery Level', lambda: preflight.getValue("/robotstatus/battery_voltage"), lambda x: float(x) > 11.0)
   """
   stdout = __runcommand("rostopic  echo " + topic + " -n 1 -p")
   try:
@@ -77,9 +81,9 @@ def check(name, value_lambda, test_lambda):
                  fails the pre-flight check).
 
   Examples:
-    preflight.check('Battery Level',    lambda: preflight.getValue("/robot/battery_voltage"), lambda x: float(x) > 11.0)
-    preflight.check('Frame Rate Param', lambda: preflight.getParam('/camera/frame_rate'),     lambda x: float(x) == 60.0)
-    preflight.check('Camera Publisher', lambda: preflight.getPublisher('/camera/image_raw'),  lambda x: len(x) == 1 and x[0].find('robot-hostname') > 0)
+    preflight.check('Battery Level',    lambda: preflight.getValue("/robotstatus/battery_voltage"), lambda x: float(x) > 11.0)
+    preflight.check('Frame Rate Param', lambda: preflight.getParam('/camera/frame_rate'),           lambda x: float(x) == 60.0)
+    preflight.check('Camera Publisher', lambda: preflight.getPublisher('/camera/image_raw'),        lambda x: len(x) == 1 and x[0].find('robot-hostname') > 0)
   """
   OK   =  '\033[92m' + 'OK' + '\033[0m'
   FAIL =  '\033[91m' + 'FAIL' + '\033[0m'
