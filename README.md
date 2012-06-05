@@ -6,7 +6,7 @@ Example preflight checklist:
     from preflight import *
     check('Camera Publisher', lambda: getPublisher('/camera/image_raw'),       lambda x: x[0].find('myrobot') > 0)
     check('Sonar Publisher',  lambda: getPublisher('/sonar_range'),            lambda x: x[0].find('myrobot') > 0)
-    check('IMU Publisher',    lambda: getPublisher('/asctec/IMU_CALCDATA'),    lambda x: x[0].find('myrobot') > 0)
+    check('IMU Publisher',    lambda: getPublisher('/imu'),                    lambda x: x[0].find('myrobot') > 0)
     check('Quatrotor Status', lambda: getValue("/robotstatus/status"),         lambda x: x == '1')
     check('Battery Level',    lambda: float(getValue("/robotstatus/battery")), lambda x: x > 11.0) 
     check('Frame Rate Param', lambda: float(getParam('/camera/frame_rate')),   lambda x: x == frame_rate)
