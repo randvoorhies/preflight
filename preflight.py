@@ -85,7 +85,7 @@ def check(name, value_lambda, test_lambda):
     preflight.check('Frame Rate Param', lambda: preflight.getParam('/camera/frame_rate'),           lambda x: float(x) == 60.0)
     preflight.check('Camera Publisher', lambda: preflight.getPublisher('/camera/image_raw'),        lambda x: len(x) == 1 and x[0].find('robot-hostname') > 0)
   """
-  OK   =  '\033[92m' + 'OK' + '\033[0m'
+  OK   =  '\033[92m' + 'OK  ' + '\033[0m'
   FAIL =  '\033[91m' + 'FAIL' + '\033[0m'
 
   checkstr = 'Checking ' + name + '...'
